@@ -1,24 +1,32 @@
 package capstone.tracker.entity;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "product_tbl")
+@Table(name = "product")
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="uID")
   private int uID;
-  private int prodName;
-  private int loc;
+  private String prodName;
+  private String loc;
   private int qty;
-  private int date;
+  @CreationTimestamp
+  private Date date;
+
+  public Product(String prodName, int qty, String loc){
+    this.prodName = prodName;
+    this.qty=qty;
+    this.loc=loc;
+  }
 }
